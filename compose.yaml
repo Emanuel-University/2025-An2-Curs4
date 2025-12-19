@@ -12,6 +12,6 @@ services:
     volumes:
       - .:/app
       # exclude
-      - /app/.git/
+      # - /app/.git/
     working_dir: /app
     user: 1000:1000
