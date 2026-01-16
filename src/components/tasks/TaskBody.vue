@@ -4,10 +4,10 @@ defineProps({
     type: Object,
     required: true
   }
-});
+})
 
-import TaskCheckbox from './TaskCheckbox.vue';
-import TaskActions from './TaskActions.vue';
+import TaskCheckbox from "./TaskCheckbox.vue"
+import TaskActions from "./TaskActions.vue"
 </script>
 
 <template>

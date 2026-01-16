@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center items-center">
-        <input type="checkbox" />
-    </div>
+  <div class="flex items-center justify-center">
+    <input type="checkbox" />
+  </div>
 </template>
