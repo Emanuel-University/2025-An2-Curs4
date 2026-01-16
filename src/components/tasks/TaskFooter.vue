@@ -10,6 +10,7 @@ const addNewTask = () => {
     favorite: false
   })
   isAddingTask.value = false
+  newTaskTitle.value = ""
 }
 
 const newTaskTitle = ref("")
