@@ -1,8 +1,9 @@
 services:
   app:
-    build: .docker
+    build: .docker/app
     stdin_open: true
     tty: true
+    container_name: app.taskproject
     environment:
       NODE_ENV: development
       CHOKIDAR_USEPOLLING: true
@@ -10,8 +11,27 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - .:/app
+      - ./:/task
       # exclude
       # - /app/.git/
-    working_dir: /app
+    working_dir: /task/app
+    user: 1000:1000
+
+  
+  api:
+    build: .docker/api
+    stdin_open: true
+    tty: true
+    container_name: api.taskproject
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: true
+      CHOKIDAR_INTERVAL: 100
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/task
+      # exclude
+      # - /api/.git/
+    working_dir: /task/api
     user: 1000:1000

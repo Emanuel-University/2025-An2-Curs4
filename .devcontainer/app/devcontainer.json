@@ -1,8 +1,9 @@
 {
-  "name": "Curs 4 - Vue.js",
-  "dockerComposeFile": "../compose.yaml",
+  "name": "Curs 17 - App",
+  "remoteUser": "node",
+  "dockerComposeFile": "../../compose.yaml",
   "service": "app",
-  "workspaceFolder": "/app",
+  "workspaceFolder": "/task",
   "mounts": [
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached"
   ],

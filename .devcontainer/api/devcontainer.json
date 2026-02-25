@@ -1,0 +1,32 @@
+{
+  "name": "Curs 17 - Api",
+  "remoteUser": "node",
+  "dockerComposeFile": "../../compose.yaml",
+  "service": "api",
+  "workspaceFolder": "/task",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "arcanis.vscode-zipfs",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "always",
+          "source.fixAll": "always"
+        }
+      }
+    }
+  },
+  "forwardPorts": [3000],
+  "containerEnv": {
+    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0"
+  },
+  "postCreateCommand": "yarn install"
+}
