@@ -12,7 +12,8 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "arcanis.vscode-zipfs",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "humao.rest-client"
       ],
       "settings": {
         "editor.formatOnSave": true,
