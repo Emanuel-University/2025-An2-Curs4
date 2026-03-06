@@ -1,8 +1,14 @@
-@mainUrl = http://localhost:3000/
+@mainUrl = http://localhost:3000/auth
 
 ###
 #
-GET {{mainUrl}}
+POST {{mainUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
 
 ###
 #
