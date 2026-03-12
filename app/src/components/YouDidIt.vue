@@ -5,7 +5,7 @@ const message = ref("Hello from Vue!")
 const clickHandler = () => {
   message.value = "Button clicked!"
 }
-alert("YouDidIt component loaded")
+// alert("YouDidIt component loaded")
 </script>
 
 <template>
