@@ -2,9 +2,6 @@ import router from "@/router"
 import { defineStore } from "pinia"
 import axios from "axios"
 
-const VALID_USERNAME = "user"
-const VALID_PASSWORD = "pass"
-
 export const useAuth = defineStore("auth", {
   state: () => ({
     isAuthenticated: false
@@ -16,6 +13,7 @@ export const useAuth = defineStore("auth", {
           username,
           password
         })
+        console.log("Login response:", response.data)
         if (response.data.success) {
           this.isAuthenticated = true
           router.push("/") // Redirect to home page after successful login

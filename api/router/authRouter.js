@@ -9,9 +9,9 @@ router.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
   if (username === USERNAME && password === PASSWORD) {
-    res.send("Login successful");
+    res.send({ success: true, message: "Login successful" });
   } else {
-    res.send("Login failed");
+    res.send({ success: false, message: "Login failed" });
   }
 });
 
