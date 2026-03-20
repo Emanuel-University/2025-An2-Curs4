@@ -27,4 +27,35 @@ router.post("/add", (req, res) => {
   res.send({ success: true });
 });
 
+router.delete("/delete", (req, res) => {
+  const id = req.body.id;
+  tasks.splice(
+    tasks.findIndex((task) => task.id === id),
+    1,
+  );
+  res.send({ success: true });
+});
+
+router.put("/update-title", (req, res) => {
+  const id = req.body.id;
+  const newTitle = req.body.newTitle;
+  const index = tasks.findIndex((task) => task.id === id);
+  tasks[index].title = newTitle;
+  res.send({ success: true });
+});
+
+router.put("/update-done", (req, res) => {
+  const id = req.body.id;
+  const index = tasks.findIndex((task) => task.id === id);
+  tasks[index].done = !tasks[index].done;
+  res.send({ success: true });
+});
+
+router.put("/update-favorite", (req, res) => {
+  const id = req.body.id;
+  const index = tasks.findIndex((task) => task.id === id);
+  tasks[index].favorite = !tasks[index].favorite;
+  res.send({ success: true });
+});
+
 export default router;

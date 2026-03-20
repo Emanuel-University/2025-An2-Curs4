@@ -23,7 +23,7 @@ const saveTaskTitle = () => {
 
 <template>
   <div class="grid grid-cols-8 gap-2">
-    <TaskCheckbox />
+    <TaskCheckbox :taskId="task.id" :isDone="task.done" />
     <div v-if="!isEditMode" class="col-span-6" @click="isEditMode = true">{{ task.title }}</div>
     <div v-else class="col-span-6">
       <input
