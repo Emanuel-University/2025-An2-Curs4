@@ -3,8 +3,9 @@ import { useAuth } from "@/stores/auth"
 import { ref } from "vue"
 const auth = useAuth()
 
-const authentification = () => {
-  auth.checkCredentials(username.value, password.value)
+const message = ref("")
+const authentification = async () => {
+  message.value = await auth.checkCredentials(username.value, password.value)
 }
 
 const username = ref("")
@@ -24,5 +25,6 @@ const password = ref("")
     <button class="rounded bg-blue-500 px-4 py-2 text-white" @click="authentification">
       Login
     </button>
+    <p class="mt-4 text-red-500">{{ message }}</p>
   </div>
 </template>

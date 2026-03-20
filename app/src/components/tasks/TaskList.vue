@@ -8,10 +8,7 @@ import TaskFooter from "./TaskFooter.vue"
 
 import { onMounted } from "vue"
 onMounted(() => {
-  const tasks = localStorage.getItem("tasks")
-  if (tasks) {
-    taskStore.tasks = JSON.parse(tasks)
-  }
+  taskStore.getTasks()
 })
 </script>
 

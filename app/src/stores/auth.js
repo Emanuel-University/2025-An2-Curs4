@@ -19,9 +19,11 @@ export const useAuth = defineStore("auth", {
           router.push("/") // Redirect to home page after successful login
         } else {
           this.isAuthenticated = false
+          return response.data.message
         }
       } catch (error) {
         this.isAuthenticated = false
+        return "An error occurred. Please try again."
       }
     },
     logout() {

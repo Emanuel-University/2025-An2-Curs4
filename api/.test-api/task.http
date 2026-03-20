@@ -1,0 +1,6 @@
+@mainUrl = http://localhost:3000/task
+
+###
+#
+GET {{mainUrl}}/get-all
+Content-Type: application/json

@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 import authRouter from "./router/authRouter.js";
+import taskRouter from "./router/taskRouter.js";
 import universityRouter from "./router/universityRouter.js";
 
 const api = express();
@@ -35,6 +36,7 @@ api.use(function (req, res, next) {
 });
 
 api.use("/auth", authRouter);
+api.use("/task", taskRouter);
 api.use("/university", universityRouter);
 
 api.listen(port, () => {
