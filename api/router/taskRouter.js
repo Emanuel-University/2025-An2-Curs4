@@ -5,19 +5,36 @@ const router = Router();
 
 const tasks = [];
 
-router.get("/get-all", (req, res) => {
+router.get("/get-all", async (req, res) => {
+  tasks.length = 0;
+  const tasksForDB = await Task.findAll();
+  tasksForDB.forEach((task) => {
+    tasks.push({
+      id: task.dataValues.id,
+      title: task.dataValues.title,
+      done: Boolean(task.dataValues.done),
+      favorite: Boolean(task.dataValues.favorite),
+    });
+  });
+  console.log("tasksForDB", tasksForDB);
+
   res.send(tasks);
 });
 
 router.post("/add", async (req, res) => {
-  const title = req.body.task;
+  const title = req.body.title;
 
-  await Task.create({
+  const task = await Task.create({
     title,
   });
-  tasks.push(title);
-  console.log(tasks);
-  res.send({ success: true });
+  tasks.push(task);
+
+  res.send({
+    id: task.dataValues.id,
+    title: task.dataValues.title,
+    done: false,
+    favorite: false,
+  });
 });
 
 router.delete("/delete", async (req, res) => {

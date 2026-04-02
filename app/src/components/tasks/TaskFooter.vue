@@ -3,12 +3,7 @@ import { useTask } from "@/stores/task"
 const taskStore = useTask()
 
 const addNewTask = () => {
-  taskStore.addTask({
-    id: Math.floor(Math.random() * 1000000),
-    title: newTaskTitle.value,
-    done: false,
-    favorite: false
-  })
+  taskStore.addTask(newTaskTitle.value)
   isAddingTask.value = false
   newTaskTitle.value = ""
 }
