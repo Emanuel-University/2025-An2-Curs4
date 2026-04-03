@@ -16,7 +16,6 @@ router.get("/get-all", async (req, res) => {
       favorite: Boolean(task.dataValues.favorite),
     });
   });
-  console.log("tasksForDB", tasksForDB);
 
   res.send(tasks);
 });
@@ -52,9 +51,6 @@ router.put("/update-title", async (req, res) => {
   const id = req.body.id;
   const newTitle = req.body.newTitle;
 
-  console.log("id", id);
-  console.log("newTitle", newTitle);
-
   await Task.update(
     {
       title: newTitle,
@@ -69,16 +65,36 @@ router.put("/update-title", async (req, res) => {
   res.send({ success: true });
 });
 
-router.put("/update-done", (req, res) => {
+router.put("/update-done", async (req, res) => {
   const id = req.body.id;
   const index = tasks.findIndex((task) => task.id === id);
+
+  await Task.update(
+    {
+      done: !tasks[index].done,
+    },
+    {
+      where: { id },
+    },
+  );
+
   tasks[index].done = !tasks[index].done;
   res.send({ success: true });
 });
 
-router.put("/update-favorite", (req, res) => {
+router.put("/update-favorite", async (req, res) => {
   const id = req.body.id;
   const index = tasks.findIndex((task) => task.id === id);
+
+  await Task.update(
+    {
+      favorite: !tasks[index].favorite,
+    },
+    {
+      where: { id },
+    },
+  );
+
   tasks[index].favorite = !tasks[index].favorite;
   res.send({ success: true });
 });
