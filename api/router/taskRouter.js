@@ -2,6 +2,7 @@ import { Router } from "express";
 import { Task } from "../database/entities/task.model.js";
 import { Description } from "../database/entities/description.model.js";
 import { Client } from "../database/entities/client.model.js";
+import { sequelize } from "../database/db.js";
 
 const router = Router();
 
@@ -28,16 +29,35 @@ router.get("/get-all", async (req, res) => {
 
 router.post("/add", async (req, res) => {
   const title = req.body.title;
+  let task;
 
-  const task = await Task.create({
-    title,
-  });
-  tasks.push(task);
+  const t = await sequelize.transaction();
+  try {
+    task = await Task.create(
+      {
+        title,
+      },
+      { transaction: t },
+    );
+    tasks.push(task);
 
-  const description = await Description.create({
-    text: title,
-    TaskId: task.id,
-  });
+    if (title === "Test 15")
+      throw new Error("Simulated error after creating task");
+
+    const description = await Description.create(
+      {
+        text: title,
+        TaskId: task.id,
+      },
+      { transaction: t },
+    );
+
+    await t.commit();
+  } catch (error) {
+    await t.rollback();
+    console.error("Error creating task or description:", error);
+    return res.status(500).send({ error: "Failed to create task" });
+  }
 
   res.send({
     id: task.dataValues.id,
