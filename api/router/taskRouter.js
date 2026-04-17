@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { Task } from "../database/entities/task.model.js";
+import { Description } from "../database/entities/description.model.js";
+import { Client } from "../database/entities/client.model.js";
 
 const router = Router();
 
@@ -7,13 +9,17 @@ const tasks = [];
 
 router.get("/get-all", async (req, res) => {
   tasks.length = 0;
-  const tasksForDB = await Task.findAll();
+  const tasksForDB = await Task.findAll({
+    include: [{ model: Client }],
+  });
+
   tasksForDB.forEach((task) => {
     tasks.push({
       id: task.dataValues.id,
       title: task.dataValues.title,
       done: Boolean(task.dataValues.done),
       favorite: Boolean(task.dataValues.favorite),
+      client: task.dataValues.Client,
     });
   });
 
@@ -27,6 +33,11 @@ router.post("/add", async (req, res) => {
     title,
   });
   tasks.push(task);
+
+  const description = await Description.create({
+    text: title,
+    TaskId: task.id,
+  });
 
   res.send({
     id: task.dataValues.id,

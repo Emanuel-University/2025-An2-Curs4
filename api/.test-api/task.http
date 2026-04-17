@@ -11,7 +11,7 @@ POST {{mainUrl}}/add
 Content-Type: application/json
 
 {
-    "task": "Test 1"
+    "title": "Test 1"
 }
 
 ###

@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 
 import authRouter from "./router/authRouter.js";
 import taskRouter from "./router/taskRouter.js";
+import clientRouter from "./router/clientRouter.js";
 import universityRouter from "./router/universityRouter.js";
 
 const api = express();
@@ -36,6 +37,7 @@ api.use(function (req, res, next) {
 });
 
 api.use("/auth", authRouter);
+api.use("/client", clientRouter);
 api.use("/task", taskRouter);
 api.use("/university", universityRouter);
 

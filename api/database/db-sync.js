@@ -1,13 +1,12 @@
-// import { sequelize } from "./db.js";
+import { sequelize } from "./db.js";
 
-// sequelize.sync({ force: true }).then(() => {
-//   console.log("FINISHED SUCCESS");
-//   process.exit(0);
-// });
+// Import all models so associations are registered before sync
+import "./entities/task.model.js";
+import "./entities/description.model.js";
+import "./entities/client.model.js";
+import "./entities/user.model.js";
 
-import { Task } from "./entities/task.model.js";
-
-Task.sync({ alter: true }).then(() => {
+await sequelize.sync({ alter: true }).then(() => {
   console.log("FINISHED SUCCESS");
   process.exit(0);
 });

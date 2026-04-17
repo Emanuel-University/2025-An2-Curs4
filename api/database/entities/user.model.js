@@ -2,24 +2,24 @@ import { DataTypes } from "sequelize";
 
 import { sequelize } from "../db.js";
 
-import { Description } from "./description.model.js";
+import { Task } from "./task.model.js";
 
-export const Task = sequelize.define(
-  "Task",
+export const User = sequelize.define(
+  "User",
   {
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
-    done: {
-      type: DataTypes.BOOLEAN,
+    email: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
-    favorite: {
-      type: DataTypes.BOOLEAN,
+    phone: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },
@@ -30,5 +30,5 @@ export const Task = sequelize.define(
   },
 );
 
-Task.hasOne(Description);
-Description.belongsTo(Task);
+User.belongsToMany(Task, { through: "UserTasks" });
+Task.belongsToMany(User, { through: "UserTasks" });

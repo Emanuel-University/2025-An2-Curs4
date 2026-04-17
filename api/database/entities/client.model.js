@@ -2,24 +2,32 @@ import { DataTypes } from "sequelize";
 
 import { sequelize } from "../db.js";
 
-import { Description } from "./description.model.js";
+import { Task } from "./task.model.js";
 
-export const Task = sequelize.define(
-  "Task",
+export const Client = sequelize.define(
+  "Client",
   {
-    title: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
-    done: {
+    priority: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
     },
-    favorite: {
-      type: DataTypes.BOOLEAN,
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    address: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },
@@ -30,5 +38,5 @@ export const Task = sequelize.define(
   },
 );
 
-Task.hasOne(Description);
-Description.belongsTo(Task);
+Client.hasMany(Task);
+Task.belongsTo(Client);
