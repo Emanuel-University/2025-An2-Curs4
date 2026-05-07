@@ -1,5 +1,6 @@
 import axios from "axios"
 import { defineStore } from "pinia"
+import { ws } from "@/main.js"
 
 export const useTask = defineStore("task", {
   state: () => ({
@@ -38,6 +39,7 @@ export const useTask = defineStore("task", {
       this.tasks[index].title = newTitle
       try {
         await axios.put(`http://localhost:3000/task/update-title`, { id, newTitle })
+        ws.send(JSON.stringify(this.tasks))
       } catch (error) {
         console.error("Error updating task title:", error)
       }
@@ -47,6 +49,7 @@ export const useTask = defineStore("task", {
       this.tasks[index].favorite = !this.tasks[index].favorite
       try {
         await axios.put(`http://localhost:3000/task/update-favorite`, { id })
+        ws.send(JSON.stringify(this.tasks))
       } catch (error) {
         console.error("Error toggling favorite status:", error)
       }
@@ -56,6 +59,7 @@ export const useTask = defineStore("task", {
       this.tasks[index].done = !this.tasks[index].done
       try {
         await axios.put(`http://localhost:3000/task/update-done`, { id })
+        ws.send(JSON.stringify(this.tasks))
       } catch (error) {
         console.error("Error toggling done status:", error)
       }

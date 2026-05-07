@@ -28,6 +28,7 @@ services:
       CHOKIDAR_INTERVAL: 100
     ports:
       - "3000:3000"
+      - "7878:7878"
     volumes:
       - ./:/task
       # exclude
