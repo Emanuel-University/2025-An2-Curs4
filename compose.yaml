@@ -28,12 +28,29 @@ services:
       CHOKIDAR_INTERVAL: 100
     ports:
       - "3000:3000"
-      - "7878:7878"
     volumes:
       - ./:/task
       # exclude
       # - /api/.git/
     working_dir: /task/api
+    user: 1000:1000
+
+  ws:
+    build: .docker/ws
+    stdin_open: true
+    tty: true
+    container_name: ws.taskproject
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: true
+      CHOKIDAR_INTERVAL: 100
+    ports:
+      - "7878:7878"
+    volumes:
+      - ./:/task
+      # exclude
+      # - /api/.git/
+    working_dir: /task/ws
     user: 1000:1000
 
   mysql:

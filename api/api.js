@@ -6,6 +6,8 @@ import taskRouter from "./router/taskRouter.js";
 import clientRouter from "./router/clientRouter.js";
 import universityRouter from "./router/universityRouter.js";
 
+import authMiddleware from "./middleware/authMiddleware.js";
+
 const api = express();
 const port = 3000;
 
@@ -25,7 +27,7 @@ api.use(function (req, res, next) {
   // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type",
+    "X-Requested-With,content-type,Authorization",
   );
 
   // Set to true if you need the website to include cookies in the requests sent
@@ -37,9 +39,9 @@ api.use(function (req, res, next) {
 });
 
 api.use("/auth", authRouter);
-api.use("/client", clientRouter);
-api.use("/task", taskRouter);
-api.use("/university", universityRouter);
+api.use("/client", authMiddleware, clientRouter);
+api.use("/task", authMiddleware, taskRouter);
+api.use("/university", authMiddleware, universityRouter);
 
 api.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

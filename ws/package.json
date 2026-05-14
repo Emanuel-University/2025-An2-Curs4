@@ -1,0 +1,11 @@
+{
+  "name": "ws",
+  "packageManager": "yarn@4.9.2",
+  "type": "module",
+  "scripts": {
+    "dev": "node ws-server.js"
+  },
+  "dependencies": {
+    "ws": "^8.20.0"
+  }
+}

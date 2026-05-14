@@ -17,10 +17,6 @@ wss.on("connection", (ws) => {
     });
   });
 
-  // const interval = setInterval(() => {
-  //   ws.send(JSON.stringify([]));
-  // }, 1000);
-
   ws.on("close", () => {
     console.log("Client disconnected");
     // Remove the disconnected client from the clients array
