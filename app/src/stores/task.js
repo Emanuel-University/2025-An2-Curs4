@@ -1,6 +1,7 @@
-import axios from "axios"
 import { defineStore } from "pinia"
 import { ws } from "@/main.js"
+
+import axios from "@/api"
 
 export const useTask = defineStore("task", {
   state: () => ({

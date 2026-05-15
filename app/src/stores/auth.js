@@ -1,6 +1,6 @@
 import router from "@/router"
 import { defineStore } from "pinia"
-import axios from "axios"
+import axios from "@/api"
 
 export const useAuth = defineStore("auth", {
   state: () => ({

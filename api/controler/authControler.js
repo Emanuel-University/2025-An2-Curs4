@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { User } from "../database/entities/user.model.js";
 
-const JWT_SECRET = "secret-change-me";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function authController(username, password) {
   if (!username || !password) {
@@ -29,7 +29,7 @@ export async function authController(username, password) {
       username: user.dataValues.username,
     },
     JWT_SECRET,
-    { expiresIn: "1h" },
+    { expiresIn: "1m" },
   );
 
   return { success: true, token };
