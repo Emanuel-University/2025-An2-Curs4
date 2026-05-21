@@ -43,9 +43,13 @@ export const useAuth = defineStore("auth", {
         if (response.data.success && response.data.token && response.data.refreshToken) {
           this.setTokens(response.data.token, response.data.refreshToken)
           return true
+        } else {
+          this.clearTokens()
+          router.push("/login")
         }
       } catch {
-        // fall through
+        this.clearTokens()
+        router.push("/login")
       }
 
       return false
