@@ -2,41 +2,70 @@ import router from "@/router"
 import { defineStore } from "pinia"
 import axios from "@/api"
 
+const API_URL = "http://localhost:3000/auth"
+
 export const useAuth = defineStore("auth", {
   state: () => ({
     token: localStorage.getItem("token") || "",
+    refreshToken: localStorage.getItem("refreshToken") || "",
     isAuthenticated: Boolean(localStorage.getItem("token"))
   }),
   actions: {
     async checkCredentials(username, password) {
       try {
-        const response = await axios.post("http://localhost:3000/auth/login", {
+        const response = await axios.post(`${API_URL}/login`, {
           username,
           password
         })
         console.log("Login response:", response.data)
-        if (response.data.success && response.data.token) {
-          this.token = response.data.token
-          localStorage.setItem("token", response.data.token)
-          this.isAuthenticated = true
+        if (response.data.success && response.data.token && response.data.refreshToken) {
+          this.setTokens(response.data.token, response.data.refreshToken)
           router.push("/") // Redirect to home page after successful login
         } else {
-          this.token = ""
-          localStorage.removeItem("token")
-          this.isAuthenticated = false
+          this.clearTokens()
           return response.data.message
         }
       } catch (error) {
-        this.token = ""
-        localStorage.removeItem("token")
-        this.isAuthenticated = false
+        this.clearTokens()
         return "An error occurred. Please try again."
       }
     },
-    logout() {
+    async refreshAccessToken() {
+      if (!this.refreshToken) {
+        return false
+      }
+
+      try {
+        const response = await axios.post(`${API_URL}/refresh`, {
+          refreshToken: this.refreshToken
+        })
+
+        if (response.data.success && response.data.token && response.data.refreshToken) {
+          this.setTokens(response.data.token, response.data.refreshToken)
+          return true
+        }
+      } catch {
+        // fall through
+      }
+
+      return false
+    },
+    setTokens(token, refreshToken) {
+      this.token = token
+      this.refreshToken = refreshToken
+      localStorage.setItem("token", token)
+      localStorage.setItem("refreshToken", refreshToken)
+      this.isAuthenticated = true
+    },
+    clearTokens() {
       this.token = ""
+      this.refreshToken = ""
       localStorage.removeItem("token")
+      localStorage.removeItem("refreshToken")
       this.isAuthenticated = false
+    },
+    logout() {
+      this.clearTokens()
       router.push("/login") // Redirect to login page after logout
     }
   }

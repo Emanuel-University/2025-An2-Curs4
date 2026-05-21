@@ -6,12 +6,18 @@ axios.interceptors.response.use(
   function (response) {
     return response
   },
-  function (error) {
-    if (error.response.status == 401) {
+  async function (error) {
+    if (error.response?.status === 401 && !error.config._retry) {
+      error.config._retry = true
       const auth = useAuth()
+      const refreshed = await auth.refreshAccessToken()
+      if (refreshed) {
+        error.config.headers["Authorization"] = `Bearer ${auth.token}`
+        return axios(error.config)
+      }
       auth.logout()
     }
-    throw new Error("Invalid token detected")
+    throw error
   }
 )
 

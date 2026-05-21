@@ -17,7 +17,7 @@ api.use(bodyParser.json());
 // Use cors middleware for proper CORS handling
 api.use(
   cors({
-    origin: "http://localhost:5173", // Frontend origin
+    origin: "http://localhost:5174", // Frontend origin
     credentials: true, // Allow credentials (cookies, Authorization header)
   }),
 );
