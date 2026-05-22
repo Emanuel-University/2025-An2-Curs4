@@ -14,7 +14,8 @@
         "dbaeumer.vscode-eslint",
         "arcanis.vscode-zipfs",
         "esbenp.prettier-vscode",
-        "humao.rest-client"
+        "humao.rest-client",
+        "vitest.explorer"
       ],
       "settings": {
         "editor.formatOnSave": true,

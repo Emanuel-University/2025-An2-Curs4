@@ -3,7 +3,8 @@
   "packageManager": "yarn@4.9.2",
   "type": "module",
   "scripts": {
-    "dev": "node --env-file=.env api.js"
+    "dev": "node --env-file=.env api.js",
+    "test": "vitest"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -13,5 +14,8 @@
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.20.0",
     "sequelize": "^6.37.8"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.7"
   }
 }

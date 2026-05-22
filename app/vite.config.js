@@ -1,18 +1,18 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from "node:url"
 
-import { defineConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
-import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
+import { defineConfig } from "vite"
+import { VitePWA } from "vite-plugin-pwa"
+import vue from "@vitejs/plugin-vue"
+import vueDevTools from "vite-plugin-vue-devtools"
 
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from "@tailwindcss/vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '',
+  base: "",
   plugins: [
-    VitePWA({ 
-      registerType: 'autoUpdate',
+    VitePWA({
+      registerType: "autoUpdate",
       devOptions: {
         enabled: true
       },
@@ -22,22 +22,24 @@ export default defineConfig({
           {
             src: "icons/android-chrome-192x192.png",
             sizes: "192x192",
-            type: "image/png",
+            type: "image/png"
           }
         ]
       }
-    }
-    ),
+    }),
     vue(),
     tailwindcss(),
-    vueDevTools(),
+    vueDevTools()
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
+      "@": fileURLToPath(new URL("./src", import.meta.url))
+    }
   },
   define: {
     __VUE_OPTIONS_API__: false
   },
+  test: {
+    environment: "happy-dom"
+  }
 })

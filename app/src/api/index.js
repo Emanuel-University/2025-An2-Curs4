@@ -7,7 +7,11 @@ axios.interceptors.response.use(
     return response
   },
   async function (error) {
-    if (error.response?.status === 401 && !error.config._retry) {
+    if (
+      error.response?.status === 401 &&
+      !error.config._retry &&
+      !error.config.url?.includes("/refresh")
+    ) {
       error.config._retry = true
       const auth = useAuth()
       const refreshed = await auth.refreshAccessToken()

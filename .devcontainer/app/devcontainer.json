@@ -13,7 +13,8 @@
         "Vue.volar",
         "dbaeumer.vscode-eslint",
         "arcanis.vscode-zipfs",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "vitest.explorer"
       ],
       "settings": {
         "editor.formatOnSave": true,
