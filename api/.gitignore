@@ -2,3 +2,5 @@ node_modules
 
 # Yarn install state
 .yarn/install-state.gz
+
+coverage

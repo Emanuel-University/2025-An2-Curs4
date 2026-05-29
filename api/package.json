@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --env-file=.env api.js",
-    "test": "vitest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -16,6 +17,7 @@
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
+    "@vitest/coverage-istanbul": "^4.1.7",
     "vitest": "^4.1.7"
   }
 }
