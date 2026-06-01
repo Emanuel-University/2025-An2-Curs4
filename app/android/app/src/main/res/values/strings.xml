@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Curs4 TAW</string>
+    <string name="title_activity_main">Curs4 TAW</string>
+    <string name="package_name">ro.curs.taw</string>
+    <string name="custom_url_scheme">ro.curs.taw</string>
+</resources>

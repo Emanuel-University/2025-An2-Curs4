@@ -11,9 +11,15 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "build:android": "yarn build && yarn cap sync android",
+    "build:ios": "yarn build && yarn cap sync ios",
+    "cap:open:android": "yarn cap open android"
   },
   "dependencies": {
+    "@capacitor/android": "^8.3.4",
+    "@capacitor/core": "^8.3.4",
+    "@capacitor/ios": "^8.3.4",
     "@tailwindcss/vite": "^4.1.16",
     "axios": "^1.13.6",
     "bootstrap-icons": "^1.13.1",
@@ -23,6 +29,7 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.3.4",
     "@eslint/css": "^0.14.1",
     "@eslint/js": "^9.39.2",
     "@eslint/json": "^0.14.0",

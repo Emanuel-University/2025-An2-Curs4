@@ -82,6 +82,14 @@ services:
       UPLOAD_LIMIT: 250M
     restart: always
 
+  android-builder:
+    build: .docker/android-builder
+    container_name: android-builder.taskproject
+    volumes:
+      - ./app:/workspace
+    profiles:
+      - android
+
 volumes:
   mysql_data:
     driver: local
